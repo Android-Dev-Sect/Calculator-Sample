@@ -1,10 +1,11 @@
 package com.kre4.calculator
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -12,14 +13,14 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kre4.calculator.hard_logic.history.HistoryDataBase
 import com.kre4.calculator.hard_logic.history.HistroryStorage
-import com.kre4.calculator.list.CustomRecyclerAdapter
-import com.kre4.calculator.list.Item
-import kotlin.math.min
+import com.kre4.calculator.list.HistoryRecyclerAdapter
+import com.kre4.calculator.list.HistoryListItem
+import java.util.concurrent.Executors
 
 
-class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragment(), View.OnClickListener {
+class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragment(),
+    View.OnClickListener {
     private var mContext: Context? = null
     private lateinit var recyclerView: RecyclerView
 
@@ -63,25 +64,30 @@ class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragm
     }
 
 
-
     override fun onClick(v: View?) {
         v ?: return
 
         when (v.id) {
             R.id.back_btn -> dialog?.dismiss()
-            R.id.clear_history_btn ->{
+            R.id.clear_history_btn -> {
                 historyStorage.clearStorage()
                 uploadRecyclerView()
-                }
+            }
         }
     }
 
-    private fun uploadRecyclerView(){
+    private fun uploadRecyclerView() {
         recyclerView.layoutManager = LinearLayoutManager(mContext)
-        recyclerView.adapter = CustomRecyclerAdapter(fillList())
+        val executor = Executors.newSingleThreadExecutor()
+        val handler = Handler(Looper.getMainLooper())
+        executor.execute {
+            val history = historyStorage.getExpressions()
+            handler.post {
+                recyclerView.adapter = HistoryRecyclerAdapter(history)
+            }
+
+        }
     }
 
-    private fun fillList(): List<Item> {
-        return historyStorage.getExpressions()
-    }
+
 }
