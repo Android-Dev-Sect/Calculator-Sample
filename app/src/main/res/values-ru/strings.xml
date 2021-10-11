@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="num_of_columns">5</string>
+    <string name="history">䷀</string>
+    <string name="history_string">История вычислений</string>
+    <string name="default_error">Ошибка!</string>
+    <string name="expression_error">Ошибка в выражении</string>
+    <string name="lot_of_operators">Слишком много операций</string>
+    <string name="prohibited_actions">Запрещенные действия</string>
+    <string name="zero_division">Деление на ноль!</string>
+    <string name="empty_results">No results found</string>
+</resources>

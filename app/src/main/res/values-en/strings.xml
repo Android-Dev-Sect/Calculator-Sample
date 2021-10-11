@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Calculator</string>
+    <string name="num_of_columns">5</string>
+    <string name="history">䷀</string>
+    <string name="history_string">Input history</string>
+    <string name="default_error">Error!</string>
+    <string name="expression_error">Expression error</string>
+    <string name="lot_of_operators">Too many operation</string>
+    <string name="prohibited_actions">Prohibited actions</string>
+    <string name="zero_division">Division by Zero</string>
+    <string name="empty_results">No results found</string>
+</resources>
