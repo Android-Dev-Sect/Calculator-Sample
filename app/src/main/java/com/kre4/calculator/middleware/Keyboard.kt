@@ -1,22 +1,8 @@
 package com.kre4.calculator.middleware
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
-import android.widget.EditText
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentManager
 import com.kre4.calculator.*
-import com.kre4.calculator.hard_logic.handlers.Calculator
-import com.kre4.calculator.hard_logic.handlers.Tokenizer
-import com.kre4.calculator.hard_logic.history.HistroryStorage
-import com.kre4.calculator.list.HistoryListItem
-import java.lang.ArithmeticException
-import java.lang.Exception
-import java.lang.NumberFormatException
-import java.util.*
 
 /*
  private val tokenizer: Tokenizer,

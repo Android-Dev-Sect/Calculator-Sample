@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.kre4.calculator.R
 
-class HistoryRecyclerAdapter(private val historyListItems: List<HistoryListItem> ):
+class HistoryRecyclerAdapter(private var historyListItems: List<HistoryListItem> ):
 
     RecyclerView.Adapter<HistoryRecyclerAdapter.HistoryViewHolder>()
     {
@@ -31,4 +31,8 @@ class HistoryRecyclerAdapter(private val historyListItems: List<HistoryListItem>
         }
 
         override fun getItemCount() = historyListItems.size
+
+        fun setNewList(historyListItems: List<HistoryListItem> ){
+            this.historyListItems = historyListItems
+        }
     }

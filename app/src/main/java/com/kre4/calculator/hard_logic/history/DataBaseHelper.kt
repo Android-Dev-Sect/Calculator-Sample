@@ -17,7 +17,5 @@ class DataBaseHelper(context: Context): SQLiteOpenHelper(context, DATA_BASE_NAME
                 + "$DATA_BASE_RESULT TEXT" + ");")
     }
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-
-    }
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) = Unit
 }

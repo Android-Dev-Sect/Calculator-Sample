@@ -1,5 +1,3 @@
 package com.kre4.calculator.list
 
-data class HistoryListItem(var expression: String, var result: String) {
-
-}
+data class HistoryListItem(var expression: String, var result: String)

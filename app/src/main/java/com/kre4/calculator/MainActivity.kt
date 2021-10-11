@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-
 import com.kre4.calculator.hard_logic.handlers.Calculator
 import com.kre4.calculator.hard_logic.handlers.Tokenizer
 import com.kre4.calculator.hard_logic.history.HistoryDataBase
@@ -14,8 +13,6 @@ import com.kre4.calculator.middleware.KeyboardCallbackImp
 import com.kre4.calculator.middleware.UserTextHandlerImp
 
 class MainActivity : AppCompatActivity() {
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +28,5 @@ class MainActivity : AppCompatActivity() {
         val keyboard = Keyboard(keyboardCallback, myView)
         keyboard.load()
 
-
     }
-
-
-
 }

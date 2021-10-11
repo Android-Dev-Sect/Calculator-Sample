@@ -1,18 +1,16 @@
 package com.kre4.calculator.middleware
 
 import android.app.Activity
-import android.content.Context
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
-import com.kre4.calculator.ErrorEnum
+import com.kre4.calculator.CalculationResult
 import com.kre4.calculator.R
 import java.lang.Exception
-import kotlin.math.exp
 
-class UserTextHandlerImp(private val Layout: View): UserTextHandler {
-    private val expressionEditText: EditText = (Layout.context as Activity).findViewById(R.id.working_space)
-    private val resultTextView: TextView =  (Layout.context as Activity).findViewById(R.id.result_space)
+class UserTextHandlerImp(private val layout: View): UserTextHandler {
+    private val expressionEditText: EditText = (layout.context as Activity).findViewById(R.id.working_space)
+    private val resultTextView: TextView =  (layout.context as Activity).findViewById(R.id.result_space)
 
     override fun handleInputNewChar(char: Char){
         showChar(char)
@@ -38,13 +36,13 @@ class UserTextHandlerImp(private val Layout: View): UserTextHandler {
         resultTextView.text = answer
     }
 
-    override fun handleInputWithErrorsAndShowResult(error: ErrorEnum) {
-        when (error){
-            ErrorEnum.EXPRESSION_ERROR -> resultTextView.text = Layout.context.getString(R.string.expression_error)
-            ErrorEnum.OPERATORS_ERROR -> resultTextView.text = Layout.context.getString(R.string.lot_of_operators)
-            ErrorEnum.PROHIBITED_ACTIONS -> resultTextView.text = Layout.context.getString(R.string.prohibited_actions)
-            ErrorEnum.ZERO_DIVISION -> resultTextView.text = Layout.context.getString(R.string.zero_division)
-
+    override fun handleCalculationResult(calculationResult: CalculationResult) {
+        when (calculationResult){
+            CalculationResult.Companion.ExpressionError -> resultTextView.text = layout.context.getString(R.string.expression_error)
+            CalculationResult.Companion.OperatorsError -> resultTextView.text = layout.context.getString(R.string.lot_of_operators)
+            CalculationResult.Companion.ProhibitedActions -> resultTextView.text = layout.context.getString(R.string.prohibited_actions)
+            CalculationResult.Companion.ZeroDivision -> resultTextView.text = layout.context.getString(R.string.zero_division)
+            is CalculationResult.Companion.SuccessfulCalculation -> showAnswer(calculationResult.answer)
             else -> {}
         }
     }

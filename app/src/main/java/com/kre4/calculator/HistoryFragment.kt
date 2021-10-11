@@ -13,16 +13,16 @@ import android.widget.Button
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kre4.calculator.hard_logic.history.HistroryStorage
+import com.kre4.calculator.hard_logic.history.HistoryStorage
 import com.kre4.calculator.list.HistoryRecyclerAdapter
-import com.kre4.calculator.list.HistoryListItem
 import java.util.concurrent.Executors
 
 
-class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragment(),
+class HistoryFragment(private val historyStorage: HistoryStorage) : DialogFragment(),
     View.OnClickListener {
     private var mContext: Context? = null
     private lateinit var recyclerView: RecyclerView
+    private val recyclerAdapter: HistoryRecyclerAdapter = HistoryRecyclerAdapter(listOf())
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +31,11 @@ class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragm
     ): View? {
         dialog?.setTitle(getString(R.string.history_string))
         val v: View = inflater.inflate(R.layout.fragment, null)
-        recyclerView = (v).findViewById(R.id.recycler_view)
 
+        recyclerView = (v).findViewById(R.id.recycler_view)
+        recyclerView.adapter = recyclerAdapter
         uploadRecyclerView()
+
         if (dialog != null && dialog!!.window != null) {
             dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             dialog!!.window!!.requestFeature(Window.FEATURE_NO_TITLE)
@@ -83,7 +85,8 @@ class HistoryFragment(private val historyStorage: HistroryStorage) : DialogFragm
         executor.execute {
             val history = historyStorage.getExpressions()
             handler.post {
-                recyclerView.adapter = HistoryRecyclerAdapter(history)
+                recyclerAdapter.setNewList(history)
+                recyclerView.adapter?.notifyDataSetChanged()
             }
 
         }

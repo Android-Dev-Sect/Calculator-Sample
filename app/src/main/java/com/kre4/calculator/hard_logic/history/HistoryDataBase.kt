@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase
 import com.kre4.calculator.*
 import com.kre4.calculator.list.HistoryListItem
 
-class HistoryDataBase(private val context: Context) : HistroryStorage {
+class HistoryDataBase(private val context: Context) : HistoryStorage {
     private val dbHelper: DataBaseHelper = DataBaseHelper(context)
 
     override fun saveExpression(historyListItem: HistoryListItem) {
